@@ -28,7 +28,6 @@ dialog
 ncurses
 newsboat
 python-pywal
-ranger
 w3m
 lynx
 zathura
