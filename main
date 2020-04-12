@@ -1,0 +1,58 @@
+#!/bin/sh
+mainMenu(){
+	select=$(dialog --title "Jacob's Auto Ricing Script" --menu "Select an option:" 0 0 0 1 Programs 2 "Install yay" 3 AUR 4 Dotfiles 5 "Change /bin/sh" 6 "Change shell" 3>&1 1>&2 2>&3 3>&-)
+( [ $select == 1 ] && program ) || ( [ $select == 2 ] && inYay ) || ( [ $select == 3 ] && aurProgs ) || ( [ $select == 4 ] && dot ) || ( [ $select == 5 ] && changeSh ) || ( [ $select == 6 ] && changeShell )
+}
+program(){
+	declare -i count=1
+	while [ "$count" -le "$(cat programs | wc -w)" ]
+	do
+		name[$count]=$(sed "${count}q;d" programs)
+		forDialog[$count]="${count} $(sed "${count}q;d" programs) off "
+		count=$((count+1))
+	done
+	set -A progs $(dialog --title "Install Programs" --checklist "Select programs:" 0 0 0 ${forDialog[*]} 3>&1 1>&2 2>&3 3>&-)
+	count=0
+	while [ "$count" -le "${#progs[@]}" ]
+	do
+		sudo -S pacman -S ${name[${progs[$count]}]} --noconfirm
+		count=$((count+1))
+	done
+	mainMenu
+}
+inYay(){
+	git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si && cd .. && sudo rm -r yay || echo "Could not install yay"
+	mainMenu
+}
+aurProgs(){
+	declare -i count=1
+	while [ "$count" -le "$(cat aur | wc -w)" ]
+	do
+		aurName[$count]=$(sed "${count}q;d" aur)
+		aurForDialog[$count]="${count} $(sed "${count}q;d" aur) off "
+		count=$((count+1))
+	done
+	set -A progsAur $(dialog --title "Install AUR Programs" --checklist "Select programs:" 0 0 0 ${aurForDialog[*]} 3>&1 1>&2 2>&3 3>&-)
+	count=0
+	while [ "$count" -le "${#progsAur[@]}" ]
+	do
+		yay -S ${aurName[${progsAur[$count]}]}
+		count=$((count+1))
+	done
+	mainMenu
+}
+dot(){
+	echo "dot"
+	mainMenu
+}
+changeSh(){
+	location=$(dialog --title "Change /bin/sh" --inputbox "Enter the location of the new shell" 0 0 3>&1 1>&2 2>&3 3>&- )
+	sudo ln -sf $location /bin/sh
+	mainMenu
+}
+changeShell(){
+	location=$(dialog --title "Change /bin/sh" --inputbox "Enter the location of the new shell" 0 0 3>&1 1>&2 2>&3 3>&- )
+	sudo usermod --shell "$location" $USER
+	mainMenu
+}
+mainMenu
