@@ -42,7 +42,7 @@ aurProgs(){
 	mainMenu
 }
 dot(){
-	echo "dot"
+	git clone https://gitlab.com/Jacob_McDonnell/dotfiles.git && cp -r dotfiles/.* $HOME && rm dotfiles
 	mainMenu
 }
 changeSh(){
