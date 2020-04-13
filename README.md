@@ -6,4 +6,4 @@ This is the auto ricing script for me. This is made for me and not for other peo
 
 If you are doing a full install everything is in the proper order.
 
-**REQUIRES THE PROGRAM DIALOG AND WILL TRY TO INSTALL AT FIRST RUN**
+**REQUIRES THE PROGRAM DIALOG**
