@@ -12,20 +12,14 @@ ksh
 zsh
 xorg
 xorg-init
-bspwm
-sxhkd
 xwallpaper
-xurls
-xclip
 vi
 vim
-dmenu
 pamixer
 feh
 htop
 ncurses
 newsboat
-python-pywal
 w3m
 lynx
 zathura-pdf-mupdf
@@ -34,3 +28,6 @@ jre-openjdk
 jdk-openjdk
 lolcat
 calibre
+gnuplot
+calc
+fzf
