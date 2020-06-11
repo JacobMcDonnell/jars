@@ -32,3 +32,8 @@ gnuplot
 calc
 fzf
 unzip
+wget
+sshfs
+nvidia
+nvidia-settings
+nvidia-utils
