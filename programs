@@ -15,7 +15,6 @@ xorg-init
 xwallpaper
 vi
 vim
-pamixer
 feh
 htop
 ncurses
@@ -40,3 +39,9 @@ nvidia-utils
 arch-wiki-docs
 arch-wiki-lite
 calcurse
+tmux
+twin
+sxiv
+qemu
+qemu-arch-system
+pulseaudio-alsa
